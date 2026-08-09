@@ -1,2 +1,836 @@
-# game-rules
-Официальные правила игры
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Официальные правила игры</title>
+<meta name="description" content="Официальные правила, античит и политика администрации игры.">
+
+<style>
+:root {
+    --bg: #07080d;
+    --panel: #0d1018;
+    --panel2: #111522;
+    --border: #242a38;
+    --text: #f2f4f8;
+    --muted: #9299a8;
+    --accent: #8b5cf6;
+    --accent2: #a78bfa;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #22c55e;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 20% 0%, rgba(139,92,246,.12), transparent 30%),
+        radial-gradient(circle at 90% 20%, rgba(124,58,237,.08), transparent 25%),
+        var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+}
+
+/* TOP BAR */
+
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: rgba(7,8,13,.88);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+.topbar-inner {
+    width: min(1400px, 100%);
+    margin: auto;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: var(--accent2);
+}
+
+.menu-button {
+    display: none;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: white;
+    padding: 9px 12px;
+    border-radius: 9px;
+    font-size: 18px;
+}
+
+/* LAYOUT */
+
+.layout {
+    width: min(1400px, 100%);
+    margin: auto;
+    display: flex;
+    padding-top: 70px;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    position: fixed;
+    top: 70px;
+    bottom: 0;
+    width: 280px;
+    padding: 30px 20px;
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    background: rgba(7,8,13,.65);
+}
+
+.sidebar-title {
+    color: var(--muted);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 15px;
+}
+
+.sidebar a {
+    display: block;
+    text-decoration: none;
+    color: var(--muted);
+    padding: 11px 13px;
+    border-radius: 8px;
+    margin-bottom: 4px;
+    transition: .2s;
+}
+
+.sidebar a:hover {
+    color: white;
+    background: var(--panel2);
+}
+
+.sidebar a.active {
+    color: white;
+    background: rgba(139,92,246,.15);
+    border-left: 3px solid var(--accent);
+}
+
+/* MAIN */
+
+main {
+    margin-left: 280px;
+    width: calc(100% - 280px);
+    padding: 55px;
+}
+
+.hero {
+    max-width: 900px;
+    margin-bottom: 60px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border: 1px solid rgba(139,92,246,.35);
+    background: rgba(139,92,246,.1);
+    color: var(--accent2);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+h1 {
+    font-size: clamp(38px, 6vw, 70px);
+    line-height: 1.05;
+    margin-bottom: 22px;
+}
+
+.hero p {
+    color: var(--muted);
+    font-size: 18px;
+    max-width: 760px;
+}
+
+/* SEARCH */
+
+.search-box {
+    margin: 30px 0 50px;
+    position: relative;
+    max-width: 750px;
+}
+
+.search-box input {
+    width: 100%;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: white;
+    padding: 16px 20px;
+    border-radius: 12px;
+    outline: none;
+    font-size: 15px;
+}
+
+.search-box input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(139,92,246,.1);
+}
+
+/* SECTIONS */
+
+.section {
+    max-width: 950px;
+    margin-bottom: 70px;
+    scroll-margin-top: 100px;
+}
+
+.section-number {
+    color: var(--accent2);
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 7px;
+}
+
+h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 20px;
+    margin: 28px 0 10px;
+}
+
+p {
+    color: #c5cad5;
+    margin-bottom: 15px;
+}
+
+ul {
+    margin: 15px 0 20px 22px;
+    color: #c5cad5;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* CARDS */
+
+.card {
+    background: linear-gradient(145deg, var(--panel), #0a0d14);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 25px;
+    margin: 20px 0;
+}
+
+.card-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+/* WARNINGS */
+
+.warning {
+    border-left: 4px solid var(--warning);
+    background: rgba(245,158,11,.07);
+}
+
+.danger {
+    border-left: 4px solid var(--danger);
+    background: rgba(239,68,68,.07);
+}
+
+.success {
+    border-left: 4px solid var(--success);
+    background: rgba(34,197,94,.07);
+}
+
+/* RULE NUMBERS */
+
+.rule {
+    display: flex;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.rule-number {
+    min-width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(139,92,246,.13);
+    color: var(--accent2);
+    font-weight: bold;
+}
+
+.rule-text {
+    flex: 1;
+}
+
+/* FOOTER */
+
+footer {
+    border-top: 1px solid var(--border);
+    margin-top: 80px;
+    padding: 35px 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+footer strong {
+    color: white;
+}
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+    .menu-button {
+        display: block;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform .25s ease;
+        z-index: 900;
+        background: #090b11;
+        width: 280px;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    main {
+        margin-left: 0;
+        width: 100%;
+        padding: 35px 20px;
+    }
+
+    .topbar-inner {
+        padding: 0 16px;
+    }
+
+    .hero {
+        margin-bottom: 40px;
+    }
+
+    h2 {
+        font-size: 27px;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+    <div class="topbar-inner">
+
+        <div class="logo">
+            GAME <span>RULES</span>
+        </div>
+
+        <button class="menu-button" onclick="toggleMenu()">
+            ☰
+        </button>
+
+    </div>
+</header>
+
+<div class="layout">
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-title">
+            Навигация
+        </div>
+
+        <a href="#general">1. Общие правила</a>
+        <a href="#accounts">2. Аккаунты</a>
+        <a href="#economy">3. Экономика</a>
+        <a href="#anticheat">4. Античит</a>
+        <a href="#punishments">5. Наказания</a>
+        <a href="#administration">6. Администрация</a>
+        <a href="#reports">7. Жалобы</a>
+        <a href="#privacy">8. Конфиденциальность</a>
+        <a href="#updates">9. Изменения правил</a>
+
+    </aside>
+
+    <main>
+
+        <section class="hero">
+
+            <div class="badge">
+                ОФИЦИАЛЬНЫЙ ДОКУМЕНТ
+            </div>
+
+            <h1>
+                Правила<br>
+                игры
+            </h1>
+
+            <p>
+                Официальные правила проекта.
+                Здесь собраны требования к игрокам,
+                использование аккаунтов, экономика,
+                античит, наказания и правила администрации.
+            </p>
+
+            <div class="search-box">
+                <input
+                    id="search"
+                    type="text"
+                    placeholder="Поиск по правилам..."
+                    oninput="searchRules()"
+                >
+            </div>
+
+        </section>
+
+
+        <!-- GENERAL -->
+
+        <section class="section searchable" id="general">
+
+            <div class="section-number">РАЗДЕЛ 01</div>
+
+            <h2>Общие правила</h2>
+
+            <p>
+                Каждый игрок обязан соблюдать правила проекта.
+                Использование игры означает согласие с действующими правилами.
+            </p>
+
+            <div class="rule">
+                <div class="rule-number">1.1</div>
+                <div class="rule-text">
+                    Запрещено намеренно использовать ошибки игры
+                    для получения преимущества.
+                </div>
+            </div>
+
+            <div class="rule">
+                <div class="rule-number">1.2</div>
+                <div class="rule-text">
+                    Запрещено вмешательство в работу сервера,
+                    API или игровых систем.
+                </div>
+            </div>
+
+            <div class="rule">
+                <div class="rule-number">1.3</div>
+                <div class="rule-text">
+                    Игрок несёт ответственность за безопасность
+                    своего аккаунта.
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ACCOUNTS -->
+
+        <section class="section searchable" id="accounts">
+
+            <div class="section-number">РАЗДЕЛ 02</div>
+
+            <h2>Аккаунты</h2>
+
+            <div class="card">
+
+                <h3>Регистрация</h3>
+
+                <p>
+                    Один Telegram ID может быть зарегистрирован
+                    только один раз.
+                </p>
+
+                <p>
+                    После регистрации ID сохраняется в базе данных.
+                    Повторная регистрация этого ID невозможна.
+                </p>
+
+            </div>
+
+            <div class="card warning">
+
+                <div class="card-title">
+                    Важно
+                </div>
+
+                <p>
+                    Если Telegram ID уже используется,
+                    система должна сообщить:
+                </p>
+
+                <p>
+                    <strong>«Этот ID уже используется.»</strong>
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ECONOMY -->
+
+        <section class="section searchable" id="economy">
+
+            <div class="section-number">РАЗДЕЛ 03</div>
+
+            <h2>Игровая экономика</h2>
+
+            <p>
+                Монеты являются игровой валютой проекта.
+            </p>
+
+            <h3>Монеты</h3>
+
+            <p>
+                Монеты можно использовать для покупки игровых
+                улучшений и других доступных возможностей.
+            </p>
+
+            <div class="card success">
+
+                <div class="card-title">
+                    Законная игровая валюта
+                </div>
+
+                <p>
+                    Монеты, полученные обычной игрой или официальной
+                    выдачей администрации, являются полноценной
+                    игровой валютой и могут использоваться в магазине.
+                </p>
+
+            </div>
+
+            <h3>Покупки</h3>
+
+            <p>
+                При покупке сервер проверяет наличие достаточного
+                количества монет и только после этого совершает операцию.
+            </p>
+
+        </section>
+
+
+        <!-- ANTICHEAT -->
+
+        <section class="section searchable" id="anticheat">
+
+            <div class="section-number">РАЗДЕЛ 04</div>
+
+            <h2>Античит</h2>
+
+            <p>
+                Проект использует серверную систему обнаружения
+                подозрительной активности.
+            </p>
+
+            <div class="card danger">
+
+                <div class="card-title">
+                    Запрещено
+                </div>
+
+                <ul>
+                    <li>Автокликеры.</li>
+                    <li>Боты.</li>
+                    <li>Макросы, дающие нечестное преимущество.</li>
+                    <li>Манипуляции запросами к серверу.</li>
+                    <li>Эксплуатация ошибок античита.</li>
+                    <li>Любое другое автоматизированное получение преимущества.</li>
+                </ul>
+
+            </div>
+
+            <h3>Анализ поведения</h3>
+
+            <p>
+                Античит оценивает не только отдельное действие,
+                но и общую картину поведения игрока.
+            </p>
+
+            <p>
+                Подозрительная активность может привести к
+                дополнительной проверке или блокировке аккаунта.
+            </p>
+
+        </section>
+
+
+        <!-- PUNISHMENTS -->
+
+        <section class="section searchable" id="punishments">
+
+            <div class="section-number">РАЗДЕЛ 05</div>
+
+            <h2>Наказания</h2>
+
+            <p>
+                В зависимости от нарушения администрация может
+                применить различные меры.
+            </p>
+
+            <div class="card">
+
+                <h3>Предупреждение</h3>
+
+                <p>
+                    Используется для менее серьёзных нарушений.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Временная блокировка</h3>
+
+                <p>
+                    Игрок временно теряет доступ к игре.
+                </p>
+
+            </div>
+
+            <div class="card danger">
+
+                <h3>Перманентная блокировка</h3>
+
+                <p>
+                    Аккаунт может быть заблокирован без ограничения
+                    срока при серьёзных нарушениях.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ADMINISTRATION -->
+
+        <section class="section searchable" id="administration">
+
+            <div class="section-number">РАЗДЕЛ 06</div>
+
+            <h2>Администрация</h2>
+
+            <p>
+                Администрация отвечает за поддержание порядка,
+                безопасность сервера и соблюдение правил.
+            </p>
+
+            <div class="card">
+
+                <h3>Административные действия</h3>
+
+                <p>
+                    Администрация может применять предусмотренные
+                    системой наказания и управлять игровыми ресурсами
+                    в рамках своих полномочий.
+                </p>
+
+                <p>
+                    Административные действия должны регистрироваться
+                    серверной системой.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- REPORTS -->
+
+        <section class="section searchable" id="reports">
+
+            <div class="section-number">РАЗДЕЛ 07</div>
+
+            <h2>Жалобы</h2>
+
+            <p>
+                Игрок может сообщить администрации о нарушении,
+                подозрительной активности или технической проблеме.
+            </p>
+
+            <div class="card">
+
+                <div class="card-title">
+                    В жалобе желательно указать
+                </div>
+
+                <ul>
+                    <li>Telegram ID игрока.</li>
+                    <li>Что произошло.</li>
+                    <li>Примерное время нарушения.</li>
+                    <li>Скриншоты или другие доказательства.</li>
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRIVACY -->
+
+        <section class="section searchable" id="privacy">
+
+            <div class="section-number">РАЗДЕЛ 08</div>
+
+            <h2>Конфиденциальность</h2>
+
+            <p>
+                Для работы аккаунта проект может хранить
+                необходимые идентификаторы и игровые данные.
+            </p>
+
+            <p>
+                Доступ к административной информации должен быть
+                ограничен уполномоченными лицами.
+            </p>
+
+        </section>
+
+
+        <!-- UPDATES -->
+
+        <section class="section searchable" id="updates">
+
+            <div class="section-number">РАЗДЕЛ 09</div>
+
+            <h2>Изменения правил</h2>
+
+            <p>
+                Правила проекта могут изменяться при добавлении
+                новых функций, изменении игровой механики или
+                обнаружении новых видов нарушений.
+            </p>
+
+            <div class="card warning">
+
+                <div class="card-title">
+                    Последнее обновление
+                </div>
+
+                <p>
+                    Версия правил: <strong>1.0</strong>
+                </p>
+
+                <p>
+                    Дата: <strong>08.08.2026</strong>
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+
+            <strong>Официальные правила игры</strong>
+
+            <br>
+
+            Документ является частью проекта.
+            Актуальная версия правил публикуется на этом сайте.
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script>
+
+function toggleMenu() {
+
+    const sidebar = document.getElementById("sidebar");
+
+    sidebar.classList.toggle("open");
+
+}
+
+
+function searchRules() {
+
+    const input =
+        document.getElementById("search")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const sections =
+        document.querySelectorAll(".searchable");
+
+    sections.forEach(section => {
+
+        const text =
+            section.innerText.toLowerCase();
+
+        if (!input || text.includes(input)) {
+
+            section.classList.remove("hidden");
+
+        } else {
+
+            section.classList.add("hidden");
+
+        }
+
+    });
+
+}
+
+
+document.querySelectorAll(".sidebar a")
+.forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        document
+            .getElementById("sidebar")
+            .classList.remove("open");
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
